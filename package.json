@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/ujju20/Local-Library-Website#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-generator": "^4.16.1"
   },
   "devDependencies": {
-    "eslint": "^7.32.0"
+    "eslint": "^7.32.0",
+    "nodemon": "^2.0.12"
   }
 }
