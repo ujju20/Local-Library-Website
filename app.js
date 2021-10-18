@@ -3,11 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var mongoDB='mongodb+srv://ujju20:JXHKFNZIkRslOqwb@cluster0.6wylx.mongodb.net/local-library';
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+var MONGODB_URL='mongodb+srv://ujju20:JXHKFNZIkRslOqwb@cluster0.6wylx.mongodb.net/localLibrary';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,5 +41,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+//Get the default connection
+var db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 module.exports = app;
