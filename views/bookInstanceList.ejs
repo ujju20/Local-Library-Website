@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title%></title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+</head>
+<body>
+    <%- include('./layout.ejs') %>
+    <h1><%= title %></h1>
+    <ul>
+        <% if (bookInstanceList.length>0) { %>
+        <% bookInstanceList.forEach(val => { %>
+            <l1>
+                <a href="<%= val.url %>"><%= val.book.title%></a>
+                <p><%=val.imprint%></p>
+                <%if (val.status == 'Available') { %>
+                    <span style="color: green"><%=val.status%></span>
+                <% } else if (val.status == 'Maintenance') { %>
+                    <span style="color:yellow"><%=val.status%></span>
+                <% } else { %>
+                    <span style="color:red"><%=val.status%></span>
+
+                <% } if (val.status != 'Available') { %>
+                    <span>(Due: <%=val.dueBackFormatted%>)</span>
+                <% } %>
+
+            </l1>
+        <% }) %>
+        <% } else { %>
+            <li>
+                <p>There are no book copies in this library.</p>
+            </li>
+        <% } %>
+    </ul>
+</body>
+</html>

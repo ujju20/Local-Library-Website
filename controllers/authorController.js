@@ -1,6 +1,12 @@
 const Author=require('../models/author');
 
 exports.authorList = (req, res, next) => {
+    Author.find()
+    .sort([['familyName','ascending']])
+    .exec((err,list) => {
+        if(err) return next(err);
+        res.render('authorList',{title:'List of Authors',authorList:list});
+    })
 
 }
 

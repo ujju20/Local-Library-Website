@@ -1,6 +1,12 @@
 const Genre=require('../models/genre');
 
 exports.genreList = (req, res, next) => {
+    Genre.find()
+    .sort([['name','ascending']])
+    .exec((err,genreList) => {
+        if (err) return next(err);
+        res.render('genreList',{title:'List of Genres',genreList:genreList});
+    });
 
 }
 

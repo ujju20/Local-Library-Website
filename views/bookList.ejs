@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title%></title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+</head>
+<body>
+    <%- include('./layout.ejs') %>
+    <h1><%= title %></h1>
+    <ul>
+        <% if (bookList.length>0) { %>
+        <% bookList.forEach(book => {%>
+            <l1>
+                <a href="<%= book.url %>"><%= book.title%></a>
+                <p><%= book.author%></p>
+            </l1>
+        <% }) } else { %>
+            <li>There are no Books in the Library</li>
+        <%}%>
+    </ul>
+</body>
+</html>
