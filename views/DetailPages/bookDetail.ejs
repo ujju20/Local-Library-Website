@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+</head>
+<body>
+    <div>
+        <h2><%=book.title%></h2>
+        <p>
+            <strong>Summary:</strong>
+            <p><%=book.summary%></p>
+        </p>
+        <p>
+            <strong>Author:</strong>
+            <a href="<%=book.author.url%>"><%=book.author.name%></a>
+        </p>
+        <p>
+            <strong>ISBN:</strong>
+            <p><%=book.isbn%></p>
+        </p>
+        <p>
+            <strong>Genre:</strong>
+            <%book.genre.forEach((val,index) => { %>
+                <a href="<%=val.url%>"><%=val.name%></a>
+                <% if (index < book.genre.length-1) { %>
+                    ,
+            <% }}) %>
+        </p>
+    </div>
+    <div style="margin-top: 20px;margin-left: 20px;">
+        <h4>Copies</h4>
+        <ul>
+            <% if (bookInstanceList.length>0) { %>
+            <% bookInstanceList.forEach(val => { %>
+                <l1>
+                    <a href="<%= val.url %>"><%= val.book.title%></a>
+                    <p><%=val.imprint%></p>
+                    <%if (val.status == 'Available') { %>
+                        <span style="color: green"><%=val.status%></span>
+                    <% } else if (val.status == 'Maintenance') { %>
+                        <span style="color:yellow"><%=val.status%></span>
+                    <% } else { %>
+                        <span style="color:red"><%=val.status%></span>
+    
+                    <% } if (val.status != 'Available') { %>
+                        <span>(Due: <%=val.dueBackFormatted%>)</span>
+                    <% } %>
+                    <p>
+                        <a href="<%=val.url%>"><%=val._id%></a>
+                    </p>
+    
+                </l1>
+            <% }) %>
+            <% } else { %>
+                <li>
+                    <p>There are no book copies of this book in the library.</p>
+                </li>
+            <% } %>
+        </ul>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+</head>
+<body>
+    <h1>ID: <%=bookInstance.id%></h1>
+    <a href="<%= bookInstance.url %>"><strong>Title: </strong> <%= bookInstance.book.title%></a>
+    <p><strong>Imprint: </strong><%=bookInstance.imprint%></p>
+    <%if (bookInstance.status == 'Available') { %>
+        <span style="color: green"><%=bookInstance.status%></span>
+    <% } else if (val.status == 'Maintenance') { %>
+        <span style="color:yellow"><%=bookInstance.status%></span>
+    <% } else { %>
+        <span style="color:red"><%=bookInstance.status%></span>
+
+    <% } if (bookInstance.status != 'Available') { %>
+        <span>(Due: <%=bookInstance.dueBackFormatted%>)</span>
+    <% } %>
+</body>
+</html>

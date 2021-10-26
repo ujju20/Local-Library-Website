@@ -7,18 +7,19 @@
     <link rel="stylesheet" href="../public/stylesheets/style.css">
 </head>
 <body>
-    <%- include('./layout.ejs') %>
+    <%- include('../layout.ejs') %>
     <h1><%= title %></h1>
     <ul>
-        <% if (bookList.length>0) { %>
-        <% bookList.forEach(book => {%>
+        <% if (authorList.length>0) { %>
+
+        <% authorList.forEach(author => {%>
             <l1>
-                <a href="<%= book.url %>"><%= book.title%></a>
-                <p><%= book.author%></p>
+                <a href="<%= author.url %>"><%= author.firstName%></a>
+                <p><%=author.lifespan%></p>
             </l1>
         <% }) } else { %>
-            <li>There are no Books in the Library</li>
-        <%}%>
+            <li>There are no authors</li>
+        <% } %>
     </ul>
 </body>
 </html>

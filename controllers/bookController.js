@@ -33,12 +33,33 @@ exports.bookList = (req, res, next) => {
             return next(err);
 
         }
-        res.render('bookList',{title:'List of Books',bookList:bookList});
+        res.render('ListPages/bookList',{title:'List of Books',bookList:bookList});
     })
 
 }
 
-exports.bookDetail = (req, res, next) => {
+exports.bookDetail =async (req, res, next) => {
+    const id=req.params.id;
+    const book=Book.findById(id).populate('auhtor').populate('genre')
+    .exec((err,book) => {
+        if (err) return next(err);
+        return book;
+    });
+
+    const bookInstance=BookInstance.find({'book':id})
+    .exec((err,bookInstances) => {
+        if (err) return next(err);
+        return bookInstances;
+    });
+
+    const result = await Promise.all([book,bookInstance]);
+    if(result.book==null)
+    {
+        const error=new Error('Genre not found');
+        error.status=404;
+        return next(err);
+    }
+    res.render('DetailPages/bookDetail',{title:'Book Detail',book:result.book,bookInstances:result.bookInstances});
 
 }
 
